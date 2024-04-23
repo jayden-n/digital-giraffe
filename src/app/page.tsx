@@ -1,7 +1,8 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import { perks } from "../../constants";
+import { PERKS } from "@/config";
+import NavBar from "@/components/NavBar";
 
 export default function Home() {
 	return (
@@ -10,11 +11,11 @@ export default function Home() {
 				<div className="py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
 					<h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
 						Your marketplace for high-quality{" "}
-						<span className="text-violet-600">digital assets</span>.
+						<span className="text-green-600">digital assets</span>.
 					</h1>
 					<p className="mt-6 text-lg max-w-prose text-muted-foreground">
-						Welcome to PixelMarket. Every asset on our platform is verified by
-						our team to ensure our highest quality standards.
+						Welcome to DigitalGiraffe. Every asset on our platform is verified
+						by our team to ensure our highest quality standards.
 					</p>
 					<div className="flex sm:flex-row flex-col gap-4 mt-6">
 						<Link href="/products" className={buttonVariants()}>
@@ -30,13 +31,13 @@ export default function Home() {
 			<section className="border-t border-gray-200 bg-gray-50">
 				<MaxWidthWrapper className="py-20">
 					<div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-y-0">
-						{perks.map((perk) => (
+						{PERKS.map((perk) => (
 							<div
 								key={perk.id}
 								className="text-center md:flex md:items-start md:text-left lg:block lg:text-center"
 							>
 								<div className="md:flex-shrink-0 flex justify-center">
-									<div className="h-16 w-16 flex items-center justify-center rounded-full bg-violet-100 text-violet-900">
+									<div className="h-16 w-16 flex items-center justify-center rounded-full bg-green-100 text-green-800">
 										{<perk.Icon className="w-1.5/3 h-1.5/3" />}
 									</div>
 								</div>
