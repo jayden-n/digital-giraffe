@@ -17,8 +17,8 @@ import Logo from "../../public/logo.svg";
 
 const Cart = () => {
 	// mocking count
-	const itemCount = 1;
-	const fee = 1;
+	const itemCount = 0;
+	const fee = 0;
 
 	return (
 		<Sheet>
@@ -28,13 +28,14 @@ const Cart = () => {
 					className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
 				/>
 				<span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-					1
+					0
 				</span>
 			</SheetTrigger>
 			<SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
 				<SheetHeader className="space-y-2.5 pr-6">
-					<SheetTitle>Cart (1)</SheetTitle>
+					<SheetTitle>Cart (0)</SheetTitle>
 				</SheetHeader>
+
 				{itemCount > 0 ? (
 					<>
 						{/* TODO: cart logic */}
@@ -92,7 +93,7 @@ const Cart = () => {
 									className: "text-sm text-muted-foreground",
 								})}
 							>
-								Add items to your cart to checkout
+								Add items to your cart to checkout &rarr;
 							</Link>
 						</SheetTrigger>
 					</div>
