@@ -10,8 +10,9 @@ export default buildConfig({
 	routes: {
 		admin: "/sell",
 	},
+
+	// admin dashboard
 	admin: {
-		// admin dashboard
 		bundler: webpackBundler(),
 		meta: {
 			titleSuffix: "- Digital Giraffe",
@@ -22,10 +23,15 @@ export default buildConfig({
 	rateLimit: {
 		max: 2000,
 	},
-	editor: slateEditor({}), // editor for CMS
+
+	// editor for CMS
+	editor: slateEditor({}),
+
+	// database
 	db: mongooseAdapter({
 		url: process.env.MONGODB_URL!,
 	}),
+
 	typescript: {
 		outputFile: path.resolve(__dirname, "payload-types.ts"),
 	},
