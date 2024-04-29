@@ -16,8 +16,12 @@ import {
 	TAuthCredentialsValidator,
 } from "@/lib/validators/account-credentials-validator";
 import { toast } from "sonner";
+import { ZodError } from "zod";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+	const router = useRouter();
+
 	const {
 		register,
 		handleSubmit,
@@ -31,7 +35,19 @@ const Page = () => {
 		onError: (err) => {
 			if (err.data?.code === "CONFLICT") {
 				toast.error("This email is already in use. Login instead?");
+				return;
 			}
+			if (err instanceof ZodError) {
+				toast.error(err.issues[0].message);
+				return;
+			}
+
+			toast.error("Something went wrong. Please try again.");
+		},
+
+		onSuccess: ({ sentToEmail }) => {
+			toast.success(`Verification email sent to ${sentToEmail}.`);
+			router.push("/verify-email?to=" + sentToEmail);
 		},
 	});
 
@@ -65,6 +81,11 @@ const Page = () => {
 									className={cn({ "focus-visible:ring-red-500": errors.email })}
 									placeholder="you@example.com"
 								/>
+
+								{/* error handling */}
+								{errors?.email && (
+									<p className="text-sm text-red-500">{errors.email.message}</p>
+								)}
 							</div>
 
 							{/* Password */}
@@ -80,6 +101,12 @@ const Page = () => {
 									})}
 									placeholder="secret123"
 								/>
+								{/* error handling */}
+								{errors?.password && (
+									<p className="text-sm text-red-500">
+										{errors.password.message}
+									</p>
+								)}
 							</div>
 
 							{/* Confirm Password */}
