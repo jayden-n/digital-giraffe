@@ -15,6 +15,7 @@ import {
 	AuthCredentialsValidator,
 	TAuthCredentialsValidator,
 } from "@/lib/validators/account-credentials-validator";
+import { toast } from "sonner";
 
 const Page = () => {
 	const {
@@ -26,7 +27,13 @@ const Page = () => {
 	});
 
 	// api call
-	const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({});
+	const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({
+		onError: (err) => {
+			if (err.data?.code === "CONFLICT") {
+				toast.error("This email is already in use. Login instead?");
+			}
+		},
+	});
 
 	const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
 		mutate({ email, password });
