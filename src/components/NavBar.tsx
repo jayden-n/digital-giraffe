@@ -5,10 +5,14 @@ import Image from "next/image";
 import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
 import Cart from "./Cart";
+import { getServerSideUser } from "@/lib/payload-utils";
+import { cookies } from "next/headers";
+import UserAccountNav from "./UserAccountNav";
 
-const NavBar = () => {
-	// mocking user
-	const user = null;
+const NavBar = async () => {
+	// getting browser cookie with Next.js
+	const nextCookies = cookies();
+	const { user } = await getServerSideUser(nextCookies);
 
 	return (
 		<div className="bg-white sticky top-0 z-50 h-16 inset-x-0">
@@ -43,7 +47,7 @@ const NavBar = () => {
 									)}
 
 									{user ? (
-										<p></p>
+										<UserAccountNav user={user} />
 									) : (
 										<Link
 											href="/register"

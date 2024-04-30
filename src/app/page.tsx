@@ -7,7 +7,7 @@ export default function Home() {
 	return (
 		<>
 			<MaxWidthWrapper>
-				<div className="py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
+				<div className="py-20 mx-auto text-center flex flex-col items-center max-w-2xl">
 					<h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
 						Your marketplace for premium{" "}
 						<span className="text-green-600">digital assets</span>.
