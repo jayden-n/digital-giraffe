@@ -60,12 +60,15 @@ const Page = () => {
 			<div className="mx-auto flex w-full justify-center flex-col space-y-6 sm:w-[450px]">
 				<div className="flex flex-col items-center text-center">
 					<Image src={Logo} height={90} alt="Logo of DigitalGiraffe" />
-					<h1 className="mb-2 mt-4 text-center text-4xl font-semibold">
+					<h1 className=" mt-6 text-center text-2xl font-bold">
 						Create your account
 					</h1>
-					<p className="text-base text-muted-foreground text-center">
-						Try it for free, no CC required
-					</p>
+					<Link
+						className={cn(buttonVariants({ variant: "link" }))}
+						href="login"
+					>
+						Already have an account? Login &rarr;
+					</Link>
 				</div>
 
 				<div className="grid gap-6">
@@ -126,12 +129,6 @@ const Page = () => {
 							<Button className="w-full mt-2">Register</Button>
 						</div>
 					</form>
-					<Link
-						className={cn(buttonVariants({ variant: "link" }))}
-						href="login"
-					>
-						Already have an account? Login &rarr;
-					</Link>
 				</div>
 			</div>
 		</div>

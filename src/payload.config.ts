@@ -34,7 +34,7 @@ export default buildConfig({
 	// editor for CMS
 	editor: slateEditor({}),
 
-	// database
+	// database connection
 	db: mongooseAdapter({
 		url: process.env.MONGODB_URL!,
 	}),

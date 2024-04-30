@@ -27,6 +27,14 @@ const Page = () => {
 	const isSeller = searchParams.get("as") === "seller"; // "login?as=seller"
 	const origin = searchParams.get("origin");
 
+	// changing buyer/seller state through URL
+	const continueAsSeller = () => {
+		router.push("?as=seller");
+	};
+	const continueAsBuyer = () => {
+		router.replace("/login", undefined);
+	};
+
 	const {
 		register,
 		handleSubmit,
@@ -73,12 +81,15 @@ const Page = () => {
 			<div className="mx-auto flex w-full justify-center flex-col space-y-6 sm:w-[450px]">
 				<div className="flex flex-col items-center text-center">
 					<Image src={Logo} height={90} alt="Logo of DigitalGiraffe" />
-					<h1 className="mb-2 mt-4 text-center text-4xl font-semibold">
-						Welcome back
+					<h1 className=" mt-6 text-center text-2xl font-bold">
+						Log in to {isSeller ? "your seller account" : "Digital Giraffe"}
 					</h1>
-					<p className="text-base text-muted-foreground text-center">
-						We miss you {"<3"}
-					</p>
+					<Link
+						className={cn(buttonVariants({ variant: "link" }))}
+						href="register"
+					>
+						Don&apos;t have an account? Register &rarr;
+					</Link>
 				</div>
 
 				<div className="grid gap-6">
@@ -122,29 +133,9 @@ const Page = () => {
 								)}
 							</div>
 
-							{/* Confirm Password */}
-							{/* <div className="grid gap-1 py-2">
-								<Label htmlFor="password">
-									Confirm Password<span className="text-red-600">*</span>
-								</Label>
-								<Input
-									type="password"
-									className={cn({
-										"focus-visible:ring-red-500": errors.confirmPassword,
-									})}
-									placeholder="secret123"
-								/>
-							</div> */}
-
 							<Button className="w-full mt-2">Login</Button>
 						</div>
 					</form>
-					<Link
-						className={cn(buttonVariants({ variant: "link" }))}
-						href="register"
-					>
-						Don&apos;t have an account? Register &rarr;
-					</Link>
 
 					{/* other option */}
 					<div className="relative">
@@ -155,11 +146,29 @@ const Page = () => {
 							<span className="w-full border-t" />
 						</div>
 						<div className="relative flex justify-center text-xs uppercase">
-							<span className="bg-background px-2 text-muted-foreground">
+							<span className="bg-background px-3 text-muted-foreground">
 								or
 							</span>
 						</div>
 					</div>
+
+					{isSeller ? (
+						<Button
+							onClick={continueAsBuyer}
+							variant="secondary"
+							disabled={isLoading}
+						>
+							Continue as buyer
+						</Button>
+					) : (
+						<Button
+							onClick={continueAsSeller}
+							variant="secondary"
+							disabled={isLoading}
+						>
+							Continue as seller
+						</Button>
+					)}
 				</div>
 			</div>
 		</div>
