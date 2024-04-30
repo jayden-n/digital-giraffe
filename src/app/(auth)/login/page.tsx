@@ -81,7 +81,7 @@ const Page = () => {
 			<div className="mx-auto flex w-full justify-center flex-col space-y-6 sm:w-[450px]">
 				<div className="flex flex-col items-center text-center">
 					<Image src={Logo} height={90} alt="Logo of DigitalGiraffe" />
-					<h1 className=" mt-6 text-center text-2xl font-bold">
+					<h1 className=" mt-6 text-center text-3xl font-bold">
 						Log in to {isSeller ? "your seller account" : "Digital Giraffe"}
 					</h1>
 					<Link
@@ -123,7 +123,7 @@ const Page = () => {
 									className={cn({
 										"focus-visible:ring-red-500": errors.password,
 									})}
-									placeholder="secret123"
+									placeholder="••••••••"
 								/>
 								{/* error handling */}
 								{errors?.password && (
