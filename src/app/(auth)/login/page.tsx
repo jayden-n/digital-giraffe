@@ -17,10 +17,15 @@ import {
 } from "@/lib/validators/account-credentials-validator";
 import { toast } from "sonner";
 import { ZodError } from "zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Page = () => {
+	const searchParams = useSearchParams();
 	const router = useRouter();
+
+	// check if user is seller
+	const isSeller = searchParams.get("as") === "seller"; // "login?as=seller"
+	const origin = searchParams.get("origin");
 
 	const {
 		register,
@@ -31,28 +36,36 @@ const Page = () => {
 	});
 
 	// api call if registration was successful
-	const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({
-		onError: (err) => {
-			if (err.data?.code === "CONFLICT") {
-				toast.error("This email is already in use. Login instead?");
-				return;
-			}
-			if (err instanceof ZodError) {
-				toast.error(err.issues[0].message);
+	const { mutate: login, isLoading } = trpc.auth.login.useMutation({
+		onSuccess: () => {
+			toast.success("Logged in successfully");
+			router.refresh(); // freshly show logout option
+
+			// navigates back to user's previous activity
+			if (origin) {
+				router.push(`/${origin}`);
 				return;
 			}
 
-			toast.error("Something went wrong. Please try again.");
+			// navigates to seller's CMS dashboard
+			if (isSeller) {
+				router.push("/sell");
+				return;
+			}
+
+			// navigates to homepage as regular user/buyer
+			router.push("/");
 		},
 
-		onSuccess: ({ sentToEmail }) => {
-			toast.success(`Verification email sent to ${sentToEmail}.`);
-			router.push("/verify-email?to=" + sentToEmail);
+		onError: (err) => {
+			if (err.data?.code === "UNAUTHORIZED") {
+				toast.error("Invalid email or password");
+			}
 		},
 	});
 
 	const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-		mutate({ email, password });
+		login({ email, password });
 	};
 
 	return (
@@ -61,10 +74,10 @@ const Page = () => {
 				<div className="flex flex-col items-center text-center">
 					<Image src={Logo} height={90} alt="Logo of DigitalGiraffe" />
 					<h1 className="mb-2 mt-4 text-center text-4xl font-semibold">
-						Create your account
+						Welcome back
 					</h1>
 					<p className="text-base text-muted-foreground text-center">
-						Try it for free, no CC required
+						We miss you {"<3"}
 					</p>
 				</div>
 
@@ -123,15 +136,30 @@ const Page = () => {
 								/>
 							</div> */}
 
-							<Button className="w-full mt-2">Register</Button>
+							<Button className="w-full mt-2">Login</Button>
 						</div>
 					</form>
 					<Link
 						className={cn(buttonVariants({ variant: "link" }))}
-						href="login"
+						href="register"
 					>
-						Already have an account? Login &rarr;
+						Don&apos;t have an account? Register &rarr;
 					</Link>
+
+					{/* other option */}
+					<div className="relative">
+						<div
+							aria-hidden="true"
+							className="absolute inset-0 flex items-center"
+						>
+							<span className="w-full border-t" />
+						</div>
+						<div className="relative flex justify-center text-xs uppercase">
+							<span className="bg-background px-2 text-muted-foreground">
+								or
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
