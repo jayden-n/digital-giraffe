@@ -1,7 +1,7 @@
 import { CollectionConfig } from "payload/types";
 
 export const Users: CollectionConfig = {
-	slug: "users",
+	slug: "users", // table name
 	auth: {
 		verify: {
 			generateEmailHTML: ({ token }) => {
