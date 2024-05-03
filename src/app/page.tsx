@@ -2,6 +2,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { PERKS } from "@/config";
+import ProductReel from "@/components/ProductReel";
 
 export default function Home() {
 	return (
@@ -23,8 +24,6 @@ export default function Home() {
 						<Button variant="ghost">Our quality promise &rarr;</Button>
 					</div>
 				</div>
-
-				{/* TODO: List products */}
 			</MaxWidthWrapper>
 
 			<section className="border-t border-gray-200 bg-gray-50">
@@ -54,6 +53,13 @@ export default function Home() {
 					</div>
 				</MaxWidthWrapper>
 			</section>
+			<MaxWidthWrapper>
+				<ProductReel
+					href="/products"
+					title="Brand new"
+					query={{ sort: "desc", limit: 4 }}
+				/>
+			</MaxWidthWrapper>
 		</>
 	);
 }

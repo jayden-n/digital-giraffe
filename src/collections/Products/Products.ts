@@ -45,6 +45,7 @@ export const Products: CollectionConfig = {
 			options: PRODUCT_CATEGORIES.map(({ label, value }) => ({ label, value })),
 			required: true,
 		},
+
 		{
 			name: "product_files",
 			label: "Product file(s)",
