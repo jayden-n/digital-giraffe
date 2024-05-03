@@ -6,6 +6,7 @@ import ProductPlaceholder from "./ProductPlaceholder";
 import Link from "next/link";
 import { cn, formatPrice } from "@/lib/utils";
 import { PRODUCT_CATEGORIES } from "@/config";
+import ImageSlider from "./ImageSlider";
 
 interface ProductListingProps {
 	product: Product | null;
@@ -13,6 +14,11 @@ interface ProductListingProps {
 }
 
 const ProductListing = ({ product, index }: ProductListingProps) => {
+	// getting image urls
+	const validImageUrls = product?.images
+		.map(({ image }) => (typeof image === "string" ? image : image.url))
+		.filter(Boolean) as string[]; // get rid of null or undefined
+
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 
 	// product stagger delay
@@ -24,6 +30,7 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
 		return () => clearTimeout(timer); // clean up to avoid memory leak
 	}, [index]);
 
+	// loading state...
 	if (!product || !isVisible) {
 		return <ProductPlaceholder />;
 	}
@@ -42,6 +49,8 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
 				href={`/product/${product.id}`}
 			>
 				<div className="flex flex-col w-full">
+					<ImageSlider urls={validImageUrls} />
+
 					<h3 className="mt-4 font-medium text-sm text-gray-700">
 						{product.name}
 					</h3>
