@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/AddToCartButton";
 import ImageSlider from "@/components/ImageSlider";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProductReel from "@/components/ProductReel";
@@ -130,7 +131,7 @@ const page = async ({ params }: PageProps) => {
 
 							{/* Product images */}
 							<div className="mt-10 lg:col-start-2 lg:row-start-2  lg:self-center">
-								<div className="aspect-square rounded-lg">
+								<div className="asepct-square rounded-lg">
 									<ImageSlider urls={validImageUrls} />
 								</div>
 							</div>
@@ -138,7 +139,9 @@ const page = async ({ params }: PageProps) => {
 							{/* Add to cart */}
 							<div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
 								<div>
-									<div className="mt-10">Add to cart btn</div>
+									<div className="mt-10">
+										<AddToCartButton />
+									</div>
 
 									<div className="mt-6 text-center">
 										<div className="group inline-flex text-sm text-medium">
