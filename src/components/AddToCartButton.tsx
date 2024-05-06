@@ -26,6 +26,7 @@ const AddToCartButton = ({ product }: { product: Product }) => {
 			}}
 			size="lg"
 			className="w-full"
+			disabled={isSuccess}
 		>
 			{isSuccess ? "Added successfully! 🥳" : "Add to cart"}
 		</Button>
