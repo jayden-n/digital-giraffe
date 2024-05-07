@@ -8,15 +8,32 @@ import { useEffect, useState } from "react";
 import { PRODUCT_CATEGORIES } from "@/config";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Check, Trash2 } from "lucide-react";
+import { Check, Loader2, Trash2 } from "lucide-react";
+import CheckoutButton from "@/components/EncryptButton";
 
 const Page = () => {
 	const { items, removeItem } = useCart();
 	const [isMounted, setIsMounted] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true); // Add loading state
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setLoading(false); // Set loading to false after 2 seconds
+		}, 2000); // 2 seconds delay
+
+		return () => clearTimeout(timer); // Cleanup function
+	}, []);
 
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
+
+	const cartTotal = items.reduce(
+		(total, { product }) => total + product.price,
+		0,
+	);
+
+	const fee = 1;
 
 	return (
 		<div className="bg-white">
@@ -143,6 +160,71 @@ const Page = () => {
 								})}
 						</ul>
 					</div>
+
+					<section className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
+						<h2 className="text-lg font-medium text-gray-900">Order summary</h2>
+						<div className="mt-6 space-y-4">
+							<div className="flex items-center justify-between">
+								<p className="text-sm text-muted-foreground">Subtotal</p>
+								{loading ? ( // Check loading state
+									<Loader2 className="h-4 w-4 animate-spin text-green-500" />
+								) : (
+									<p className="text-sm font-medium text-muted-foreground">
+										{formatPrice(cartTotal)}
+									</p>
+								)}
+							</div>
+
+							<div className="flex items-center justify-between border-t border-gray-200 pt-4">
+								<div className="flex items-center text-sm text-muted-foreground">
+									<span>Flat Transaction Fee</span>
+								</div>
+								<div className="text-sm font-medium text-muted-foreground">
+									{loading ? (
+										<Loader2 className="h-4 w-4 animate-spin text-green-500" />
+									) : (
+										formatPrice(fee)
+									)}
+								</div>
+							</div>
+
+							<div className="flex items-center justify-between border-t border-gray-200 pt-4">
+								<div className="flex items-center text-sm text-muted-foreground">
+									<span>Delivery/Shipping</span>
+								</div>
+								<div className="text-sm font-medium text-muted-foreground">
+									{loading ? (
+										<Loader2 className="h-4 w-4 animate-spin text-green-500" />
+									) : (
+										<span>Free</span>
+									)}
+								</div>
+							</div>
+
+							<div className="flex items-center justify-between border-t border-gray-200 pt-4">
+								<div className="text-base font-medium text-gray-900">
+									Order Total
+								</div>
+								<div className="text-base font-medium text-gray-900">
+									{loading ? (
+										<Loader2 className="h-4 w-4 animate-spin text-green-500" />
+									) : (
+										formatPrice(cartTotal + fee)
+									)}
+								</div>
+							</div>
+						</div>
+
+						<div className="mt-6">
+							{loading ? (
+								<div className="flex justify-center">
+									<Loader2 className="h-4 w-4 animate-spin text-green-500" />
+								</div>
+							) : (
+								<CheckoutButton />
+							)}
+						</div>
+					</section>
 				</div>
 			</div>
 		</div>
