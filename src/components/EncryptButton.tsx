@@ -3,7 +3,7 @@ import { FiLock } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const TARGET_TEXT = "Checkout";
-const CYCLES_PER_LETTER = 2;
+const CYCLES_PER_LETTER = 4;
 const SHUFFLE_TIME = 50;
 
 const CHARS = "!@#$%^&*():{};|,.<>/?";

@@ -150,7 +150,7 @@ const Page = () => {
 														aria-hidden="true"
 														className="h-5 w-5 flex-shrink-0 text-green-500"
 													/>
-													<p className="ml-2 text-sm">
+													<p className="ml-2 text-sm text-muted-foreground">
 														Eligible for instant delivery
 													</p>
 												</p>
