@@ -10,11 +10,24 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Check, Loader2, Trash2 } from "lucide-react";
 import CheckoutButton from "@/components/EncryptButton";
+import { trpc } from "@/trpc/client";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
 	const { items, removeItem } = useCart();
+	const fee = 1;
+
+	const router = useRouter();
+
+	const { mutate: createCheckoutSession, isLoading } =
+		trpc.payment.createSession.useMutation({
+			onSuccess: ({ url }) => {
+				if (url) router.push(url);
+			},
+		});
+
 	const [isMounted, setIsMounted] = useState<boolean>(false);
-	const [loading, setLoading] = useState<boolean>(true); // Add loading state
+	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -33,7 +46,7 @@ const Page = () => {
 		0,
 	);
 
-	const fee = 1;
+	const productIds = items.map(({ product }) => product.id);
 
 	return (
 		<div className="bg-white">
@@ -221,7 +234,12 @@ const Page = () => {
 									<Loader2 className="h-4 w-4 animate-spin text-green-500" />
 								</div>
 							) : (
-								<CheckoutButton />
+								<CheckoutButton
+									productIds={productIds}
+									createCheckoutSession={createCheckoutSession}
+									isLoading={isLoading}
+									items={items}
+								/>
 							)}
 						</div>
 					</section>

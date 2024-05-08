@@ -1,6 +1,15 @@
 import { useRef, useState } from "react";
 import { FiLock } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { CartItem } from "@/hooks/use-cart";
+import { Loader2 } from "lucide-react";
+
+interface CheckoutButtonProps {
+	productIds: string[];
+	isLoading: boolean;
+	createCheckoutSession: any;
+	items: CartItem[];
+}
 
 const TARGET_TEXT = "Checkout";
 const CYCLES_PER_LETTER = 4;
@@ -8,7 +17,12 @@ const SHUFFLE_TIME = 50;
 
 const CHARS = "!@#$%^&*():{};|,.<>/?";
 
-const CheckoutButton = () => {
+const CheckoutButton = ({
+	productIds,
+	isLoading,
+	createCheckoutSession,
+	items,
+}: CheckoutButtonProps) => {
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
 	const [text, setText] = useState(TARGET_TEXT);
@@ -55,10 +69,16 @@ const CheckoutButton = () => {
 			}}
 			onMouseEnter={scramble}
 			onMouseLeave={stopScramble}
-			className="group relative overflow-hidden  w-full bg-green-600 h-11 bg-primary  hover:bg-primary/85 rounded-md px-8 font-mono flex justify-center items-center font-medium uppercase text-primary-foreground transition-colors  "
+			className="group relative overflow-hidden  w-full bg-green-600 h-11 bg-primary  hover:bg-primary/85 rounded-md px-8 font-mono flex justify-center items-center font-medium uppercase text-primary-foreground transition-colors disabled:cursor-not-allowed disabled:opacity-65"
+			onClick={() => createCheckoutSession({ productIds })}
+			disabled={isLoading || items.length === 0}
 		>
 			<div className="relative z-10 flex items-center gap-3">
-				<FiLock />
+				{isLoading ? (
+					<Loader2 className="w-4 h-4 animate-spin mr-1.5" />
+				) : (
+					<FiLock />
+				)}
 				<span>{text}</span>
 			</div>
 			<motion.span
