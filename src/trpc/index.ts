@@ -4,12 +4,11 @@ import { authRouter } from "./auth-router";
 import { publicProcedure, router } from "./trpc";
 import { QueryValidator } from "../lib/validators/query-validator";
 import { getPayloadClient } from "../get-payload";
+import { paymentRouter } from "./payment-router";
 
 export const appRouter = router({
-	testingApiRoute: publicProcedure.query(() => {
-		return "hello world";
-	}),
 	auth: authRouter,
+	payment: paymentRouter,
 	getInfiniteProducts: publicProcedure
 		// Setting input schema validation for the procedure
 		.input(

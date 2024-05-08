@@ -1,4 +1,5 @@
 "use client";
+
 import { ShoppingCart } from "lucide-react";
 import {
 	Sheet,
@@ -14,11 +15,27 @@ import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import Image from "next/image";
 import Logo from "../../public/logo.svg";
+import { useCart } from "@/hooks/use-cart";
+import { ScrollArea } from "./ui/scroll-area";
+import CartItem from "./CartItem";
+import { useEffect, useState } from "react";
 
 const Cart = () => {
-	// mocking count
-	const itemCount = 0;
-	const fee = 0;
+	const { items } = useCart();
+
+	const itemCount = items.length;
+
+	// check if the component is mounted
+	const [isMounted, setIsMounted] = useState<boolean>(false);
+	useEffect(() => setIsMounted(true), []);
+
+	// extracts the price of each product, and accumulates the total price of all products in the shopping cart
+	const cartTotal = items.reduce(
+		(total, { product }) => total + product.price,
+		0,
+	);
+
+	const fee = 1;
 
 	return (
 		<Sheet>
@@ -28,19 +45,24 @@ const Cart = () => {
 					className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
 				/>
 				<span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-					0
+					{isMounted ? itemCount : ""}
 				</span>
 			</SheetTrigger>
 			<SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
 				<SheetHeader className="space-y-2.5 pr-6">
-					<SheetTitle>Cart (0)</SheetTitle>
+					<SheetTitle>Cart ({itemCount})</SheetTitle>
 				</SheetHeader>
 
 				{itemCount > 0 ? (
 					<>
 						{/* TODO: cart logic */}
-						<div className="flex w-full flex-col pr-6">Cart items</div>
-
+						<div className="flex w-full flex-col pr-6">
+							<ScrollArea>
+								{items.map(({ product }) => (
+									<CartItem product={product} key={product.id} />
+								))}
+							</ScrollArea>
+						</div>
 						<div className="space-y-4 pr-6">
 							<Separator />
 							<div className="space-y-1.5 text-sm">
@@ -57,7 +79,7 @@ const Cart = () => {
 								{/* Total Amount */}
 								<div className="flex">
 									<span className="flex-1">Total</span>
-									<span>{formatPrice(fee)}</span>
+									<span>{formatPrice(cartTotal + fee)}</span>
 								</div>
 							</div>
 
@@ -69,7 +91,7 @@ const Cart = () => {
 										href="/cart"
 										className={buttonVariants({ className: "w-full" })}
 									>
-										Continue to Checkout
+										Continue to checkout
 									</Link>
 								</SheetTrigger>
 							</SheetFooter>
