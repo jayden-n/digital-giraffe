@@ -1,4 +1,7 @@
-import { BeforeChangeHook } from "payload/dist/collections/config/types";
+import {
+	AfterChangeHook,
+	BeforeChangeHook,
+} from "payload/dist/collections/config/types";
 import { PRODUCT_CATEGORIES } from "../../config/index";
 import { CollectionConfig } from "payload/types";
 import { Product } from "../../cms-types";
@@ -10,6 +13,43 @@ const addUser: BeforeChangeHook<Product> = async ({ req, data }) => {
 	return { ...data, user: user.id };
 };
 
+const syncUser: AfterChangeHook<Product> = async ({ req, doc }) => {
+	// retrieve the full user data by their ID from the "users" collection using the request payload.
+	const fullUser = await req.payload.findByID({
+		collection: "users",
+		id: req.user.id,
+	});
+
+	if (fullUser && typeof fullUser === "object") {
+		// destructure the 'products' field from the full user data.
+		const { products } = fullUser;
+
+		// create an array containing unique IDs of products associated with the user.
+		const allIDs = [
+			...(products?.map((product) =>
+				typeof product === "object" ? product.id : product,
+			) || []),
+		];
+
+		// filter out duplicate product IDs to ensure uniqueness.
+		const createdProductIDs = allIDs.filter(
+			(id, index) => allIDs.indexOf(id) === index,
+		);
+
+		// construct an updated array of product IDs by adding the ID of the changed product (doc).
+		const dataToUpdate = [...createdProductIDs, doc.id];
+
+		// update the user's product list in the database with the new array of product IDs.
+		await req.payload.update({
+			collection: "users",
+			id: fullUser.id,
+			data: {
+				products: dataToUpdate,
+			},
+		});
+	}
+};
+
 export const Products: CollectionConfig = {
 	slug: "products", // table name
 	admin: {
@@ -17,6 +57,7 @@ export const Products: CollectionConfig = {
 	},
 	access: {},
 	hooks: {
+		afterChange: [syncUser],
 		beforeChange: [
 			addUser,
 			async (args) => {

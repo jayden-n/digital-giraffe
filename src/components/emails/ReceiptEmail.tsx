@@ -20,6 +20,7 @@ import { format } from "date-fns";
 import { Product } from "../../cms-types";
 import { formatPrice } from "../../lib/utils";
 import * as React from "react";
+import Logo from "../../../public/logo.svg";
 
 interface ReceiptEmailProps {
 	date: Date;
@@ -46,12 +47,7 @@ const ReceiptEmail = ({
 				<Container style={container}>
 					<Section>
 						<Column>
-							<Img
-								src={`${process.env.NEXT_PUBLIC_SERVER_URL}/hippo-email-sent.png`}
-								width="100"
-								height="100"
-								alt="Digital Giraffe"
-							/>
+							<Img src={Logo} width="100" height="100" alt="Digital Giraffe" />
 						</Column>
 
 						<Column align="right" style={tableCell}>
@@ -265,7 +261,7 @@ const productDescription = {
 
 const productLink = {
 	fontSize: "12px",
-	color: "rgb(0,112,201)",
+	color: "#22c55e",
 	textDecoration: "none",
 };
 
