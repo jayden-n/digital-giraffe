@@ -13,7 +13,7 @@ import {
 	Text,
 	render,
 } from "@react-email/components";
-import Logo from "../../../public/logo.svg";
+// import Logo from "../../../public/logo.svg";
 
 import * as React from "react";
 
@@ -34,13 +34,13 @@ export const EmailTemplate = ({
 			<Preview>The marketplace for high-quality digital goods.</Preview>
 			<Body style={main}>
 				<Container style={container}>
-					<Img
+					{/* <Img
 						src={Logo}
 						width="150"
 						height="150"
 						alt="Digital Giraffe"
 						style={logo}
-					/>
+					/> */}
 					<Text style={paragraph}>Hi there,</Text>
 					<Text style={paragraph}>
 						Welcome to Digital Giraffe, the marketplace for high quality digital

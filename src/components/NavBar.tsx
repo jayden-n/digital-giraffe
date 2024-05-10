@@ -1,78 +1,45 @@
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
-import Logo from "../../public/logo.svg";
+import MobileNav from "./MobileNav";
 import Image from "next/image";
-import NavItems from "./NavItems";
-import { buttonVariants } from "./ui/button";
-import Cart from "./Cart";
+import Logo from "../../public/logo.svg";
 import { getServerSideUser } from "@/lib/payload-utils";
 import { cookies } from "next/headers";
-import UserAccountNav from "./UserAccountNav";
+import NavItems from "./NavItems";
+import UserNav from "./UserNav";
+import Cart from "./Cart";
 
-const NavBar = async () => {
-	// getting browser cookie with Next.js
+const Navbar = async () => {
 	const nextCookies = cookies();
+
 	const { user } = await getServerSideUser(nextCookies);
 
 	return (
-		<div className="bg-white sticky top-0 z-50 h-16 inset-x-0">
-			<header className="relative bg-white">
+		<div className="sticky top-0 z-50 border-b supports-backdrop-blur:bg-background/90 border-foreground/10 backdrop-blur">
+			<header className="relative w-full">
 				<MaxWidthWrapper>
-					<div className="border-b border-gray-200">
-						<div className="flex h-16 items-center">
-							{/* TODO: Mobile nav */}
-							<div className="ml-4 flex lg:ml-0">
+					<div>
+						<div className="flex items-center h-16">
+							<MobileNav user={user} />
+							<div className="ml-4 lg:ml-0">
 								<Link href="/">
-									<Image src={Logo} height={45} alt="Logo of DigitalGiraffe" />
+									<div className="relative w-12 h-12">
+										<Image src={Logo} fill alt="Digital Giraffe Logo" />
+									</div>
 								</Link>
 							</div>
-							<div className="hidden lg:block lg:ml-8 lg:self-stretch">
+							<div className="z-50 hidden lg:ml-8 lg:block lg:self-stretch">
 								<NavItems />
 							</div>
 
-							{/* RIGHT ELEMENTS */}
-							<div className="ml-auto flex items-center">
-								<div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-									{user ? null : (
-										<Link
-											href="/login"
-											className={buttonVariants({ variant: "ghost" })}
-										>
-											Login
-										</Link>
-									)}
+							<div className="flex items-center ml-auto">
+								<UserNav
+									user={user}
+									className="hidden lg:flex lg:flex-1 lg:justify-end lg:space-x-6 lg:items-center"
+								/>
 
-									{user ? null : (
-										<span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-									)}
-
-									{user ? (
-										<UserAccountNav user={user} />
-									) : (
-										<Link
-											href="/register"
-											className={buttonVariants({ variant: "ghost" })}
-										>
-											Register
-										</Link>
-									)}
-
-									{user ? (
-										<span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-									) : null}
-
-									{user ? null : (
-										<div className="flex lg:ml-6">
-											<span
-												className="h-6 w-px bg-gray-200"
-												aria-hidden="true"
-											/>
-										</div>
-									)}
-
-									<div className="ml-4 flow-root lg:ml-6">
-										<Cart />
-									</div>
+								<div className="flow-root ml-4 lg:ml-6">
+									<Cart />
 								</div>
 							</div>
 						</div>
@@ -82,4 +49,5 @@ const NavBar = async () => {
 		</div>
 	);
 };
-export default NavBar;
+
+export default Navbar;
