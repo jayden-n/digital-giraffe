@@ -5,8 +5,12 @@ const nextConfig = {
 			{
 				hostname: "localhost",
 				pathname: "**",
-				port: "3000",
 				protocol: "http",
+				port: "3000",
+			},
+			{
+				hostname: "digital-giraffe.onrender.com",
+				protocol: "https",
 			},
 		],
 	},
