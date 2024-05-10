@@ -65,6 +65,8 @@ export const paymentRouter = router({
 					cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/cart`,
 					payment_method_types: ["card"],
 					mode: "payment",
+
+					// sending to the webhook
 					metadata: {
 						userId: user.id,
 						orderId: order.id,
