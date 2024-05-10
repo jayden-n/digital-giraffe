@@ -26,7 +26,7 @@ export function formatPrice(
 export function constructMetadata({
 	title = "Digital Giraffe - Your marketplace for digital assets!",
 	description = "Digital Giraffe is an open-source marketplace for high-quality digital goods.",
-	image = "../../public/logo.svg",
+	image = "/thumbnail.png",
 	icons = "/favicon.ico",
 	noIndex = false,
 }: {
