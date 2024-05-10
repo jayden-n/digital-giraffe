@@ -3,9 +3,10 @@ import {
 	BeforeChangeHook,
 } from "payload/dist/collections/config/types";
 import { PRODUCT_CATEGORIES } from "../../config/index";
-import { CollectionConfig } from "payload/types";
+import { Access, CollectionConfig } from "payload/types";
 import { Product } from "../../cms-types";
 import { stripe } from "../../lib/stripe";
+import { User } from "payload/dist/auth";
 
 const addUser: BeforeChangeHook<Product> = async ({ req, data }) => {
 	const user = req.user;
@@ -50,12 +51,46 @@ const syncUser: AfterChangeHook<Product> = async ({ req, doc }) => {
 	}
 };
 
+const isAdminOrHasAccess =
+	(): Access =>
+	({ req: { user: _user } }) => {
+		const user = _user as User | undefined;
+
+		if (!user) return false;
+		if (user.role === "admin") return true;
+
+		// @ts-ignore
+		const userProductIDs = (user.products || []).reduce<Array<string>>(
+			// @ts-ignore
+			(acc, product) => {
+				if (!product) return acc;
+				if (typeof product === "string") {
+					acc.push(product);
+				} else {
+					acc.push(product.id);
+				}
+
+				return acc;
+			},
+			[],
+		);
+
+		return {
+			id: {
+				in: userProductIDs,
+			},
+		};
+	};
 export const Products: CollectionConfig = {
 	slug: "products", // table name
 	admin: {
 		useAsTitle: "name",
 	},
-	access: {},
+	access: {
+		read: isAdminOrHasAccess(),
+		update: isAdminOrHasAccess(),
+		delete: isAdminOrHasAccess(),
+	},
 	hooks: {
 		afterChange: [syncUser],
 		beforeChange: [

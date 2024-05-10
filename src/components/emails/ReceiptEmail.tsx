@@ -20,7 +20,8 @@ import { format } from "date-fns";
 import { Product } from "../../cms-types";
 import { formatPrice } from "../../lib/utils";
 import * as React from "react";
-import Logo from "../../../public/logo.svg";
+
+// const Logo = require("../../../public/logo.svg") as string;
 
 interface ReceiptEmailProps {
 	date: Date;
@@ -46,9 +47,9 @@ const ReceiptEmail = ({
 			<Body style={main}>
 				<Container style={container}>
 					<Section>
-						<Column>
+						{/* <Column>
 							<Img src={Logo} width="100" height="100" alt="Digital Giraffe" />
-						</Column>
+						</Column> */}
 
 						<Column align="right" style={tableCell}>
 							<Text style={heading}>Receipt</Text>
