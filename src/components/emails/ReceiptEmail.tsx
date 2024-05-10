@@ -19,6 +19,7 @@ import {
 import { format } from "date-fns";
 import { Product } from "../../cms-types";
 import { formatPrice } from "../../lib/utils";
+import * as React from "react";
 
 interface ReceiptEmailProps {
 	date: Date;
