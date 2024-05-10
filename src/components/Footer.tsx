@@ -8,7 +8,12 @@ import Logo from "../../public/logo.svg";
 
 const Footer = () => {
 	const pathname = usePathname(); // get the path in URL
-	const pathsToMinimize = ["/verify-email", "/register", "/login"];
+	const pathsToMinimize = [
+		"/verify-email",
+		"/register",
+		"/login",
+		"/thank-you",
+	];
 
 	return (
 		<footer className="flex-grow-0 mt-5 ">

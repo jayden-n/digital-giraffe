@@ -22,7 +22,9 @@ const VerifyEmailPage = ({ searchParams }: PageProps) => {
 						<div className="relative mb-4 h-60 w-60 text-muted-foreground">
 							<Image src={Logo} alt="Logo of DigitalGiraffe" />
 						</div>
-						<h3 className="font-semibold text-2xl">Check your email</h3>
+						<h3 className="font-semibold text-2xl">
+							Please check your email :)
+						</h3>
 
 						{/* check if user has signed up yet */}
 						{toEmail ? (
