@@ -20,6 +20,7 @@ export const stripeWebhookHandler = async (
 
 	let event;
 	try {
+		// make sure the sender req is from Stripe
 		event = stripe.webhooks.constructEvent(
 			body,
 			signature,
