@@ -80,7 +80,7 @@ const Page = () => {
 		<div className="container relative flex flex-col pt-20 items-center justify-center lg:px-0">
 			<div className="mx-auto flex w-full justify-center flex-col space-y-6 sm:w-[450px]">
 				<div className="flex flex-col items-center text-center">
-					<Image src={Logo} height={90} alt="Logo of DigitalGiraffe" />
+					<Image src={Logo} height={90} priority alt="Logo of DigitalGiraffe" />
 					<h1 className=" mt-6 text-center text-3xl font-bold">
 						Log in to {isSeller ? "your seller account" : "Digital Giraffe"}
 					</h1>
