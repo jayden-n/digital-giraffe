@@ -64,13 +64,14 @@ and copy the .env.example variables into a separate .env file, fill them out & a
 - [Tailwind](https://tailwindcss.com/) – Utility-first CSS framework for rapid UI development.
 - [Shadcn UI](https://ui.shadcn.com/) - A component library built on top of Tailwind + [Radix](https://www.radix-ui.com/).
 - [Lucide](https://lucide.dev/) – Beautifully simple, pixel-perfect icons.
+- [Framer Motion](https://www.framer.com/motion/) – Animations that work like magic!
 
 ### Backend
 
 - [Payload](https://payloadcms.com/) – An highly customizable, headless Content Management System (CMS) for Next.js.
 - [Stripe](https://stripe.com/) – Payment processing for Internet businesses.
 - [Trpc](https://trpc.io/) - Makes the APIs End-to-end type-safe and boost the development speed and experience.
-- [Resend](https://resend.com/) – A confirmation email sending platform when user creates a new account.
+- [Resend](https://resend.com/) – A confirmation email sending platform for whenever user creates a new account.
 
 ### Platform + Database
 
