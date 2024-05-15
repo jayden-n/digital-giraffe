@@ -19,7 +19,7 @@ const Footer = () => {
 		<footer className="flex-grow-0 mt-5 ">
 			<MaxWidthWrapper>
 				{/* dynamic footer */}
-				<div className="border-t border-foreground/15">
+				<div className="border-t border-zinc-100">
 					{pathsToMinimize.includes(pathname) ? null : (
 						<div className="py-3">
 							<div className="flex justify-center">
