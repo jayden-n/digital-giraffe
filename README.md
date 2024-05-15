@@ -25,6 +25,8 @@
 ![Lazy loading product image](/docs/GIFs/lazy-product-image.gif)
 ![Product detail slider](/docs/GIFs/product-detail-slider.gif)
 ![Lazy loading product detail](/docs/GIFs/lazy-loading.gif)
+![Shopping cart](/docs/GIFs/shopping-cart.gif)
+![Checkout button](/docs/GIFs/checkout-button.gif)
 
 ---
 
