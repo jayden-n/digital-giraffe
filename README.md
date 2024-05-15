@@ -8,12 +8,19 @@
 ## :camera: Screenshots
 
 ![Homepage](/docs/screenshots/homepage.png)
+
 ![Product detail](/docs/screenshots/product-detail-page.png)
+
 ![Thank you](/docs/screenshots/thank-you-page.png)
+
 ![Check out cart](/docs/screenshots/checkout-cart.png)
+
 ![Check out Stripe](/docs/screenshots/checkout-stripe.png)
+
 ![Register](/docs/screenshots/register.png)
+
 ![Login](/docs/screenshots/login.png)
+
 ![Confirm email](/docs/screenshots/confirm-email.png)
 
 ---
@@ -21,9 +28,13 @@
 ## :gem: GIFs features
 
 ![Testimonials slider](/docs/GIFs/testimonials-slider.gif)
+
 ![Product image slider](/docs/GIFs/product-image-slider.gif)
+
 ![Lazy loading product image](/docs/GIFs/lazy-product-image.gif)
+
 ![Product detail slider](/docs/GIFs/product-detail-slider.gif)
+
 ![Lazy loading product detail](/docs/GIFs/lazy-loading.gif)
 
 ---
