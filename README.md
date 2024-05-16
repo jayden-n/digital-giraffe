@@ -1,7 +1,12 @@
+
 # Digital Giraffe
 
 > [!NOTE]
 > Digital Giraffe is a full-stack Content Management System (CMS) digital product marketplace where you can buy/sell any digital products such as UI Kits, E-books, etc.
+
+<p align="center">
+  <img src="/public/logo.svg" alt="Homepage" width="200"/>
+</p>
 
 ---
 
