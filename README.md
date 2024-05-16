@@ -70,7 +70,7 @@ and copy the .env.example variables into a separate .env file, fill them out & a
 
 - [Payload](https://payloadcms.com/) – An highly customizable, headless Content Management System (CMS) for Next.js.
 - [Stripe](https://stripe.com/) – Payment processing for Internet businesses.
-- [Trpc](https://trpc.io/) - Makes the APIs End-to-end type-safe and boost the development speed and experience.
+- [tRPC](https://trpc.io/) - Makes the APIs End-to-end type-safe and boost the development speed and experience.
 - [Resend](https://resend.com/) – A confirmation email sending platform for whenever user creates a new account.
 
 ### Platform + Database
