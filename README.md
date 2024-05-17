@@ -8,7 +8,7 @@
   <img src="/public/logo.svg" alt="Homepage" width="200"/>
 </p>
 
----
+
 
 ## :camera: Screenshots
 
@@ -58,7 +58,7 @@ To get started with this open-source project, run:
   git clone https://github.com/jayden-n/digital-giraffe.git
 ```
 
-and copy the .env.example variables into a separate .env file, fill them out & and that's all you need to get started!
+and copy the .env.just.example variables into a separate .env file, fill them out & and that's all you need to get started!
 
 ---
 
