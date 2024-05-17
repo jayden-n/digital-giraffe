@@ -2,7 +2,7 @@
 # Digital Giraffe
 
 > [!NOTE]
-> Digital Giraffe is a full-stack Content Management System (CMS) digital product marketplace where you can buy/sell any digital products such as UI Kits, E-books, etc.
+> Digital Giraffe is a full-stack Content Management System (CMS) digital product marketplace where you can buy/sell/download any digital assets such as UI Kits, E-books, etc.
 
 <p align="center">
   <img src="/public/logo.svg" alt="Homepage" width="200"/>
@@ -14,9 +14,11 @@
 
 ![Homepage](/docs/screenshots/homepage.png)
 
+![Thank you](/docs/screenshots/thank-you-page.png)
+
 ![Product detail](/docs/screenshots/product-detail-page.png)
 
-![Thank you](/docs/screenshots/thank-you-page.png)
+<img width="1726" alt="Screenshot 2024-05-16 at 8 05 16 PM" src="https://github.com/jayden-n/digital-giraffe/assets/94060508/84827c5d-b54f-4ba1-aa3c-fa747ebe8e62">
 
 ![Check out cart](/docs/screenshots/checkout-cart.png)
 
